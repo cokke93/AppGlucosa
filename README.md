@@ -28,3 +28,7 @@ GlucoApp⚪ es una aplicación desarrollada en Java que tiene como objetivo prin
  ## 🧮 Tecnologías utilizadas
 
 ☕ JAVA
+
+## 🩹 Control de versiones
+  GIT <br>
+  GITHUB
