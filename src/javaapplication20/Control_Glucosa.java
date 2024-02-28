@@ -109,6 +109,9 @@ public class Control_Glucosa {
         for (int i = 0; i < registro_azucar.length; i++) {
             if (registro_azucar[i] != 0) {
                 System.out.printf("%1$tF %1$tT | %2$d%n", horasControl[i], registro_azucar[i]);
+            } else if (registro_azucar[0] == 0) {
+                System.out.println("No hay datos registrados.");
+                break;
             }
         }
         System.out.println("----------------------------");
@@ -135,7 +138,7 @@ public class Control_Glucosa {
      */
     public void enRango() {
 
-        System.out.println("Eventos totales de Glucosa en rango: " + this.glucosa_en_rango);
+        System.out.println("Eventos totales de Glucosa optimos: " + this.glucosa_en_rango);
     }
 
     /**
@@ -156,13 +159,13 @@ public class Control_Glucosa {
         this.glucosa_media = mediaGlucosa / this.controles;
 
         if (this.glucosa_media >= 200 && this.glucosa_media < 300) {
-            return "Tu media de Glucosa es: " + glucosa_media + " HbA1c estimada: 10-16 - Media alta, cuida la alimentación";
+            return "Tu media de Glucosa es: " + glucosa_media + " HbA1c estimada: 10-16 - Media de glucosa alta, cuida la alimentación";
         } else if (this.glucosa_media >= 300) {
-            return "Tu media de Glucosa es: " + glucosa_media + " HbA1c estimada: 16-21 - Peligro, media muy alta!";
+            return "Tu media de Glucosa es: " + glucosa_media + " HbA1c estimada: 16-21 - Peligro, media de glucosa muy alta!";
         } else if (this.glucosa_media > 150 && this.glucosa_media < 200) {
-            return "Tu media de Glucosa es: " + glucosa_media + " HbA1c estimada: 8-10 - Media normal, sigue así!";
+            return "Tu media de Glucosa es: " + glucosa_media + " HbA1c estimada: 8-10 - Media de glucosa normal, sigue así!";
         } else if (this.glucosa_media > 50 && this.glucosa_media <= 150) {
-            return "Tu media de Glucosa es: " + glucosa_media + " HbA1c estimada: 2-7 - Media baja, genial!!!";
+            return "Tu media de Glucosa es: " + glucosa_media + " HbA1c estimada: 2-7 - Media en buen rango, genial!!!";
         } else {
             return "Fuera de rango.";
         }

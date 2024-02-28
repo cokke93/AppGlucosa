@@ -8,24 +8,150 @@ package javaapplication20;
  * @author Jorge Pedrajas Rubio
  * @version 1.0.0 27 feb 2024 18:03:22
  */
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class App_prin {
 
     public static void main(String[] args) {
 
-        Control_Glucosa Jorge = crearControl();
-        crearUsuario(Jorge);
+        Control_Glucosa control1 = crearControl();
+        System.out.println("");
+        Usuarios usuario = crearUsuario(control1);
+        System.out.println("");
+        menu(usuario);
 
-        Jorge.registrarGlucosa(2000);
-        Jorge.registrarGlucosa(1000);
-        Jorge.registrarGlucosa(60);
+    }
 
+    /**
+     * Menu principla de la aplicación
+     *
+     * @param usuario Se pasa por parametro el usuario activo
+     */
+    public static void menu(Usuarios usuario) {
+        Scanner sc = new Scanner(System.in);
+        int opcion = 0;
+
+        do {
+            try {
+                System.out.println("-------- Menú GlucoApp --------");
+                System.out.println("1. Registrar niveles de glucosa.");
+                System.out.println("2. Consultar Hba1c / Glucosa media en sangre.");
+                System.out.println("3. Consultar registro de glucosa.");
+                System.out.println("4. Consultar informe general.");
+                System.out.println("5. Limpiar registro de Glucosa.");
+                System.out.println("6. Modificar datos de usuario.");
+                System.out.println("7. Salir.");
+                System.out.println("");
+                System.out.print("Ingrese su opción: ");
+                opcion = sc.nextInt();
+                sc.nextLine();
+
+                switch (opcion) {
+                    case 1 -> {
+                        System.out.print("Ingrese el nivel de glucosa: ");
+                        int nivelGlucosa = sc.nextInt();
+                        usuario.getControlGlucosa().registrarGlucosa(nivelGlucosa);
+                        System.out.println("Nivel de glucosa registrado.");
+                    }
+                    case 2 -> {
+                        System.out.println("--------- Glucosa media ---------");
+                        System.out.println(usuario.getControlGlucosa().mediaGlucosa());
+                    }
+                    case 3 ->
+                        usuario.getControlGlucosa().consultarHistorial();
+                    case 4 -> {
+                        System.out.println("--------- Informe general ---------");
+                        System.out.println(usuario.getControlGlucosa().informeGeneral());
+                    }
+                    case 5 -> {
+                        usuario.getControlGlucosa().limpiarRegistro();
+                        System.out.println("Registro reinicializado.");
+                    }
+                    case 6 -> {
+                        System.out.println("-------- Modificar Datos de Usuario --------");
+                        System.out.println("1. Modificar nombre.");
+                        System.out.println("2. Modificar edad.");
+                        System.out.println("3. Modificar peso.");
+                        System.out.println("4. Cambiar centro de salud.");
+                        System.out.println("5. Volver al menú principal.");
+                        System.out.print("Ingrese su opción: ");
+                        int opcionModificacion = sc.nextInt();
+                        sc.nextLine();
+
+                        switch (opcionModificacion) {
+                            case 1 -> {
+                                System.out.println("Nombre actual: " + usuario.getNombre());
+                                System.out.print("Ingrese el nuevo nombre: ");
+                                String nuevoNombre = sc.nextLine();
+                                usuario.modificarNombre(nuevoNombre);
+                                System.out.println("Nombre modificado correctamente.");
+                                System.out.println("");
+                            }
+                            case 2 -> {
+                                System.out.println("Edad actual: " + usuario.getEdad());
+                                System.out.print("Ingrese la nueva edad: ");
+                                int nuevaEdad = sc.nextInt();
+                                sc.nextLine();
+                                usuario.modificarEdad(nuevaEdad);
+                                System.out.println("Edad modificada correctamente.");
+                                System.out.println("");
+                            }
+                            case 3 -> {
+                                System.out.println("Peso actual: " + usuario.getPeso());
+                                System.out.print("Ingrese el nuevo peso: ");
+                                double nuevoPeso = sc.nextDouble();
+                                sc.nextLine();
+                                usuario.modificarPeso(nuevoPeso);
+                                System.out.println("Peso modificado correctamente.");
+                                System.out.println("");
+                            }
+                            case 4 -> {
+                                System.out.println("Centro de salud actual: " + usuario.getCentro_de_salud());
+                                System.out.print("Ingrese el nuevo centro de salud: ");
+                                String nuevoCentroSalud = sc.nextLine();
+                                usuario.cambiarCentroSalud(nuevoCentroSalud);
+                                System.out.println("Centro de salud modificado correctamente.");
+                                System.out.println("");
+                            }
+                            case 5 -> {
+                                System.out.println("Volviendo al menú principal.");
+                                System.out.println("");
+                            }
+                            default -> {
+                                System.out.println("Opción incorrecta. Por favor, ingrese una opción válida.");
+                                System.out.println("");
+                            }
+                        }
+                        break;
+                    }
+                    case 7 -> {
+                        System.out.println("¿Desea salir de la aplicación? (Si/No)");
+                        String confirmacion = sc.nextLine();
+
+                        if (confirmacion.equalsIgnoreCase("Si") || confirmacion.equalsIgnoreCase("Sí")) {
+                            opcion = 8;
+                            System.out.println("Gracias por usar GlucoApp, hasta pronto.");
+
+                        } else if (confirmacion.equalsIgnoreCase("No")) {
+                            System.out.println("Volviendo al menú principal.");
+                            System.out.println("");
+                        }
+                    }
+                    default -> {
+                        System.out.println("Opción incorrecta. Por favor, ingrese una opción válida.");
+                        System.out.println("");
+                    }
+
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Opción incorrecta. Por favor, ingrese una opción válida.");
+                sc.nextLine();
+            }
+        } while (opcion
+                != 8);
         System.out.println("");
-        Jorge.consultarHistorial();
-        System.out.println("");
-        System.out.println("");
-        System.out.println(Jorge.informeGeneral());
+        sc.close();
 
     }
 
@@ -57,8 +183,9 @@ public class App_prin {
                 } else {
                     System.out.println("Respuesta inválida. Por favor, responda Si o No.");
                 }
-            } catch (Exception e) {
-                System.out.println("Error al crear el control. Reiniciando cuestionario");
+            } catch (InputMismatchException e) {
+                System.out.println("Por favor, introduzca Si o No");
+                sc.nextLine();
             }
         } while (control == null);
 
@@ -109,13 +236,11 @@ public class App_prin {
                 } else {
                     System.out.println("Respuesta inválida. Por favor, responda Si o No.");
                 }
-            } catch (Exception e) {
-                System.out.println("Error al crear el usuario. Reiniciando cuestionario");
+            } catch (InputMismatchException e) {
+                System.out.println("Por favor, introduzca Si o No");
                 sc.nextLine();
             }
         } while (usuario == null);
-
-        sc.close();
         return usuario;
     }
 }
