@@ -79,10 +79,12 @@ public class Control_Glucosa {
      * @param glucosa La glucosa actual del usuario
      */
     public void registrarGlucosa(int glucosa) {
+        
         this.glucosa = glucosa;
         registro_azucar[controles] = this.glucosa;
+        horasControl[controles] = new Date();
         controles++;
-        horasControl[controles - 1] = new Date();
+       
         System.out.println("Glucosa actual: " + this.glucosa);
         if (this.glucosa >= 200) {
             System.out.println("Peligro, glucosa ALTA, administrese insulina y midase el azucar otra vez en media hora.");
@@ -150,24 +152,29 @@ public class Control_Glucosa {
 
         int mediaGlucosa = 0;
 
-        for (int i = 0; i < registro_azucar.length; i++) {
-            if (registro_azucar[i] != 0) {
-                mediaGlucosa += registro_azucar[i];
+        try {
+            for (int i = 0; i < registro_azucar.length; i++) {
+                if (registro_azucar[i] != 0) {
+                    mediaGlucosa += registro_azucar[i];
+                }
             }
-        }
 
-        this.glucosa_media = mediaGlucosa / this.controles;
+            this.glucosa_media = mediaGlucosa / this.controles;
 
-        if (this.glucosa_media >= 200 && this.glucosa_media < 300) {
-            return "Tu media de Glucosa es: " + glucosa_media + " HbA1c estimada: 10-16 - Media de glucosa alta, cuida la alimentación";
-        } else if (this.glucosa_media >= 300) {
-            return "Tu media de Glucosa es: " + glucosa_media + " HbA1c estimada: 16-21 - Peligro, media de glucosa muy alta!";
-        } else if (this.glucosa_media > 150 && this.glucosa_media < 200) {
-            return "Tu media de Glucosa es: " + glucosa_media + " HbA1c estimada: 8-10 - Media de glucosa normal, sigue así!";
-        } else if (this.glucosa_media > 50 && this.glucosa_media <= 150) {
-            return "Tu media de Glucosa es: " + glucosa_media + " HbA1c estimada: 2-7 - Media en buen rango, genial!!!";
-        } else {
-            return "Fuera de rango.";
+            if (this.glucosa_media >= 200 && this.glucosa_media < 300) {
+                return "Tu media de Glucosa es: " + glucosa_media + " HbA1c estimada: 10-16 - Media de glucosa alta, cuida la alimentación";
+            } else if (this.glucosa_media >= 300) {
+                return "Tu media de Glucosa es: " + glucosa_media + " HbA1c estimada: 16-21 - Peligro, media de glucosa muy alta!";
+            } else if (this.glucosa_media > 150 && this.glucosa_media < 200) {
+                return "Tu media de Glucosa es: " + glucosa_media + " HbA1c estimada: 8-10 - Media de glucosa normal, sigue así!";
+            } else if (this.glucosa_media > 50 && this.glucosa_media <= 150) {
+                return "Tu media de Glucosa es: " + glucosa_media + " HbA1c estimada: 2-7 - Media en buen rango, genial!!!";
+            } else {
+                return "Fuera de rango.";
+            }
+        } catch (ArithmeticException a) {
+            System.out.println("");
+            return "Error al calcular la media, compruebe los datos del dispositivo";
         }
     }
 
@@ -177,10 +184,13 @@ public class Control_Glucosa {
      * @return Devuelve datos generales del control de usuario
      */
     public String informeGeneral() {
-
-        return "Nombre del dispositivo de control: " + this.nombre + "\nFecha de creacion del registro: " + this.fecha_creacion + "\nControles totales realizados: "
-                + this.controles + "\nEventos de Glucosa Baja: " + this.glucosa_baja + "\nEventos de Glucosa Alta: " + this.glucosa_alta + "\nMediciones de Glucosa en rango: "
-                + this.glucosa_en_rango + "\n" + mediaGlucosa();
+        return "Nombre del dispositivo de control: " + this.nombre
+                + "\nFecha de creacion del registro: " + this.fecha_creacion
+                + "\nControles totales realizados: " + this.controles
+                + "\nEventos de Glucosa Baja: " + this.glucosa_baja
+                + "\nEventos de Glucosa Alta: " + this.glucosa_alta
+                + "\nMediciones de Glucosa en rango: " + this.glucosa_en_rango
+                + "\n" + mediaGlucosa();
     }
 
     /**

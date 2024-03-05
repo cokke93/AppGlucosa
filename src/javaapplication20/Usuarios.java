@@ -181,4 +181,16 @@ public class Usuarios {
         this.centro_de_salud = centro_de_salud;
     }
 
+    public String datosUsuario() {
+        return "Datos de usuario\n"
+                + "Nombre: " + nombre + "\n"
+                + "Edad: " + edad + "\n"
+                + "Peso: " + peso + "\n"
+                + "Centro de salud: " + centro_de_salud + "\n"
+                + "Edad de debut: " + debut + "\n"
+                + "NºUsuario: " + id_usuario;
+                
+                
+    }
+
 }

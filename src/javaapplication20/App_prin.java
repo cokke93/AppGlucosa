@@ -41,7 +41,8 @@ public class App_prin {
                 System.out.println("4. Consultar informe general.");
                 System.out.println("5. Limpiar registro de Glucosa.");
                 System.out.println("6. Modificar datos de usuario.");
-                System.out.println("7. Salir.");
+                System.out.println("7. Mostrar datos de usuario.");
+                System.out.println("8. Salir.");
                 System.out.println("");
                 System.out.print("Ingrese su opción: ");
                 opcion = sc.nextInt();
@@ -53,20 +54,26 @@ public class App_prin {
                         int nivelGlucosa = sc.nextInt();
                         usuario.getControlGlucosa().registrarGlucosa(nivelGlucosa);
                         System.out.println("Nivel de glucosa registrado.");
+                        System.out.println("");
                     }
                     case 2 -> {
                         System.out.println("--------- Glucosa media ---------");
                         System.out.println(usuario.getControlGlucosa().mediaGlucosa());
+                        System.out.println("");
                     }
-                    case 3 ->
+                    case 3 -> {
                         usuario.getControlGlucosa().consultarHistorial();
+                        System.out.println("");
+                    }
                     case 4 -> {
                         System.out.println("--------- Informe general ---------");
                         System.out.println(usuario.getControlGlucosa().informeGeneral());
+                        System.out.println("");
                     }
                     case 5 -> {
                         usuario.getControlGlucosa().limpiarRegistro();
                         System.out.println("Registro reinicializado.");
+                        System.out.println("");
                     }
                     case 6 -> {
                         System.out.println("-------- Modificar Datos de Usuario --------");
@@ -125,12 +132,16 @@ public class App_prin {
                         }
                         break;
                     }
-                    case 7 -> {
+                    case 7->{
+                        System.out.println(usuario.datosUsuario());
+                        System.out.println("");
+                    }
+                    case 8 -> {
                         System.out.println("¿Desea salir de la aplicación? (Si/No)");
                         String confirmacion = sc.nextLine();
 
                         if (confirmacion.equalsIgnoreCase("Si") || confirmacion.equalsIgnoreCase("Sí")) {
-                            opcion = 8;
+                            opcion = 9;
                             System.out.println("Gracias por usar GlucoApp, hasta pronto.");
 
                         } else if (confirmacion.equalsIgnoreCase("No")) {
@@ -139,17 +150,18 @@ public class App_prin {
                         }
                     }
                     default -> {
+                        System.out.println("");
                         System.out.println("Opción incorrecta. Por favor, ingrese una opción válida.");
                         System.out.println("");
                     }
 
                 }
             } catch (InputMismatchException e) {
+                System.out.println("");
                 System.out.println("Opción incorrecta. Por favor, ingrese una opción válida.");
                 sc.nextLine();
             }
-        } while (opcion
-                != 8);
+        } while (opcion!= 9);
         System.out.println("");
         sc.close();
 
