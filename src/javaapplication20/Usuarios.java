@@ -181,6 +181,10 @@ public class Usuarios {
         this.centro_de_salud = centro_de_salud;
     }
 
+    /**
+     * 
+     * @return Informacion usuarios
+     */
     public String datosUsuario() {
         return "Datos de usuario\n"
                 + "Nombre: " + nombre + "\n"
