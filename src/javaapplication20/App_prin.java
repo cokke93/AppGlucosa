@@ -71,10 +71,18 @@ public class App_prin {
                         System.out.println("");
                     }
                     case 5 -> {
-                        usuario.getControlGlucosa().limpiarRegistro();
-                        System.out.println("Registro reinicializado.");
-                        System.out.println("");
+                        System.out.println("¿Estás seguro de que deseas reiniciar el registro? Esto borrará todos los datos almacenados. (Si/No)");
+                        String confirmacion = sc.nextLine();
+                        if (confirmacion.equalsIgnoreCase("Si") || confirmacion.equalsIgnoreCase("Sí")) {
+                            usuario.getControlGlucosa().limpiarRegistro();
+                            System.out.println("Registro reinicializado.");
+                            System.out.println("");
+                        } else {
+                            System.out.println("Operación cancelada.");
+                            System.out.println("");
+                        }
                     }
+
                     case 6 -> {
                         System.out.println("-------- Modificar Datos de Usuario --------");
                         System.out.println("1. Modificar nombre.");
@@ -132,7 +140,7 @@ public class App_prin {
                         }
                         break;
                     }
-                    case 7->{
+                    case 7 -> {
                         System.out.println(usuario.datosUsuario());
                         System.out.println("");
                     }
@@ -159,9 +167,10 @@ public class App_prin {
             } catch (InputMismatchException e) {
                 System.out.println("");
                 System.out.println("Opción incorrecta. Por favor, ingrese una opción válida.");
+                System.out.println("");
                 sc.nextLine();
             }
-        } while (opcion!= 9);
+        } while (opcion != 9);
         System.out.println("");
         sc.close();
 

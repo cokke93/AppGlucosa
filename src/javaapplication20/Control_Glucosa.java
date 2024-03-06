@@ -8,6 +8,7 @@ package javaapplication20;
  * @author Jorge Pedrajas Rubio
  * @version 1.0.0 27 feb 2024 18:02:40
  */
+import java.util.Arrays;
 import java.util.Date;
 
 public class Control_Glucosa {
@@ -15,7 +16,7 @@ public class Control_Glucosa {
     /**
      * Número total de controles de glucosa realizados.
      */
-    private int controles = 0;
+    private int controles;
 
     /**
      * Nivel actual de glucosa.
@@ -79,24 +80,27 @@ public class Control_Glucosa {
      * @param glucosa La glucosa actual del usuario
      */
     public void registrarGlucosa(int glucosa) {
-        
-        this.glucosa = glucosa;
-        registro_azucar[controles] = this.glucosa;
-        horasControl[controles] = new Date();
-        controles++;
-       
-        System.out.println("Glucosa actual: " + this.glucosa);
-        if (this.glucosa >= 200) {
-            System.out.println("Peligro, glucosa ALTA, administrese insulina y midase el azucar otra vez en media hora.");
-            glucosa_alta++;
-        } else if (this.glucosa < 80) {
-            System.out.println("Peligro, glucosa BAJA, administrese carbohidratos rapidos y midase el azucar de nuevo en media hora.");
-            glucosa_baja++;
-        } else {
-            System.out.println("Glucosa dentro de rango.");
-            this.glucosa_en_rango++;
-        }
 
+        if (controles < registro_azucar.length && controles < horasControl.length) {
+            this.glucosa = glucosa;
+            registro_azucar[controles] = this.glucosa;
+            horasControl[controles] = new Date();
+            controles++;
+
+            System.out.println("Glucosa actual: " + this.glucosa);
+            if (this.glucosa >= 200) {
+                System.out.println("Peligro, glucosa ALTA, administrese insulina y midase el azucar otra vez en media hora.");
+                glucosa_alta++;
+            } else if (this.glucosa < 80) {
+                System.out.println("Peligro, glucosa BAJA, administrese carbohidratos rapidos y midase el azucar de nuevo en media hora.");
+                glucosa_baja++;
+            } else {
+                System.out.println("Glucosa dentro de rango.");
+                this.glucosa_en_rango++;
+            }
+        } else {
+            System.out.println("No se pueden registrar más controles. Se ha alcanzado el límite de almacenamiento.");
+        }
     }
 
     /**
@@ -153,25 +157,24 @@ public class Control_Glucosa {
         int mediaGlucosa = 0;
 
         try {
-            for (int i = 0; i < registro_azucar.length; i++) {
-                if (registro_azucar[i] != 0) {
-                    mediaGlucosa += registro_azucar[i];
-                }
+            for (int i = 0; i < controles; i++) {
+                mediaGlucosa += registro_azucar[i];
             }
 
             this.glucosa_media = mediaGlucosa / this.controles;
 
-            if (this.glucosa_media >= 200 && this.glucosa_media < 300) {
-                return "Tu media de Glucosa es: " + glucosa_media + " HbA1c estimada: 10-16 - Media de glucosa alta, cuida la alimentación";
-            } else if (this.glucosa_media >= 300) {
+            if (this.glucosa_media >= 300) {
                 return "Tu media de Glucosa es: " + glucosa_media + " HbA1c estimada: 16-21 - Peligro, media de glucosa muy alta!";
+            } else if (this.glucosa_media >= 200 && this.glucosa_media < 300) {
+                return "Tu media de Glucosa es: " + glucosa_media + " HbA1c estimada: 10-16 - Media de glucosa alta, cuida la alimentación";
             } else if (this.glucosa_media > 150 && this.glucosa_media < 200) {
                 return "Tu media de Glucosa es: " + glucosa_media + " HbA1c estimada: 8-10 - Media de glucosa normal, sigue así!";
-            } else if (this.glucosa_media > 50 && this.glucosa_media <= 150) {
+            } else if (this.glucosa_media > 70 && this.glucosa_media <= 150) {
                 return "Tu media de Glucosa es: " + glucosa_media + " HbA1c estimada: 2-7 - Media en buen rango, genial!!!";
             } else {
                 return "Fuera de rango.";
             }
+
         } catch (ArithmeticException a) {
             System.out.println("");
             return "Error al calcular la media, compruebe los datos del dispositivo";
@@ -198,17 +201,11 @@ public class Control_Glucosa {
      */
     public void limpiarRegistro() {
 
-        for (int i = 0; i < registro_azucar.length; i++) {
-            if (registro_azucar[i] != 0) {
-                registro_azucar[i] = 0;
-            }
-
-            for (int j = 0; j < horasControl.length; j++) {
-                if (horasControl[i] != null) {
-                    horasControl[i] = null;
-                }
-            }
-        }
-
+        this.controles = 0;
+        this.glucosa_alta = 0;
+        this.glucosa_baja = 0;
+        this.glucosa_en_rango = 0;
+        Arrays.fill(registro_azucar, 0);
+        Arrays.fill(horasControl, null);
     }
 }
