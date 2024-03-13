@@ -44,9 +44,9 @@ public class ControlGlucosa {
     private int glucosaMedia;
 
     /**
-     * Nombre del dispositivo de control.
+     * Marca del dispositivo de control.
      */
-    private final String nombre;
+    private final String marca;
 
     /**
      * Fecha de creación del registro.
@@ -68,8 +68,8 @@ public class ControlGlucosa {
      *
      * @param nombre El nombre del dispositivo de control.
      */
-    public ControlGlucosa(String nombre) {
-        this.nombre = nombre;
+    public ControlGlucosa(String marca) {
+        this.marca = marca;
         this.fechaCreacion = LocalDateTime.now();
     }
 
@@ -191,7 +191,7 @@ public class ControlGlucosa {
      * @return Devuelve datos generales del control de usuario
      */
     public String informeGeneral() {
-        return "Nombre del dispositivo de control: " + this.nombre
+        return "Nombre del dispositivo de control: " + this.marca
                 + "\nFecha de creacion del registro: " + this.fechaCreacion
                 + "\nControles totales realizados: " + this.controles
                 + "\nEventos de Glucosa Baja: " + this.glucosaBaja

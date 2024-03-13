@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package GlucoAPP;
 
 /**
@@ -15,11 +11,55 @@ public class GlucoApp {
 
     public static void main(String[] args) {
 
-        ControlGlucosa control1 = crearControl();
-        System.out.println("");
-        Usuarios usuario = crearUsuario(control1);
-        System.out.println("");
-        menuPrincipal(usuario);
+        menuInicio();
+
+    }
+
+    public static void menuInicio() {
+
+        Scanner sc = new Scanner(System.in);
+        int opcion;
+        String inicio = """
+        [Bienvenido a su registro de glucosa personal]
+        
+        Seleccione una opción:
+        1. Crear nuevo usuario
+        2. Elegir usuario existente
+        3. Salir
+       
+        """;
+
+        do {
+
+            System.out.println(inicio);
+            try {
+                opcion = sc.nextInt();
+
+                switch (opcion) {
+                    case 1 -> {
+                        crearUsuario();
+                    }
+                    case 2 -> {
+                        if (Usuarios.getRegUsuarios().isEmpty()) {
+                            System.out.println("No hay usuarios, cree uno nuevo");
+                            System.out.println("");
+                        } else {
+                            menuPrincipal(Usuarios.seleccionarUsuario());
+                        }
+
+                    }
+                    case 3 -> {
+                        System.out.println("Saliendo de la aplicacion, hasta pronto!!");
+                    }
+                    default ->
+                        System.out.println("Opción inválida. Por favor, seleccione una opción válida.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Error: entrada no válida. Por favor, ingrese un número.");
+                sc.nextLine();
+                opcion = 0;
+            }
+        } while (opcion != 3);
 
     }
 
@@ -124,7 +164,6 @@ public class GlucoApp {
             }
         } while (opcion != 9);
         System.out.println("");
-        sc.close();
 
     }
 
@@ -209,50 +248,11 @@ public class GlucoApp {
     }
 
     /**
-     * //Crea el objeto de control mediante un cuestionario
+     * Metodo que crea un usuario y le asigna su aparto de control
      *
-     * @return Devuelve un objeto de tipo ControlGlucosa
-     */
-    public static ControlGlucosa crearControl() {
-        Scanner sc = new Scanner(System.in);
-        ControlGlucosa control = null;
-        String confirmacion;
-
-        System.out.println("[Bienvenido a su registro de glucosa personal]");
-
-        do {
-            try {
-                System.out.println("Por favor, introduzca la marca de su dispositivo de control:");
-                String marca = sc.nextLine();
-
-                System.out.println("Marca introducida: " + marca);
-                System.out.println("¿Es correcto? (Si/No)");
-                confirmacion = sc.nextLine();
-
-                if (confirmacion.equalsIgnoreCase("Si") || marca.equalsIgnoreCase("Sí")) {
-                    control = new ControlGlucosa(marca);
-                } else if (confirmacion.equalsIgnoreCase("No")) {
-                    System.out.println("Datos incorrectos, reinicie el cuestionario");
-                } else {
-                    System.out.println("Respuesta inválida. Por favor, responda Si o No.");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Por favor, introduzca Si o No");
-                sc.nextLine();
-            }
-        } while (control == null);
-
-        return control;
-
-    }
-
-    /**
-     * Metodo que crea un usuario mediante Scanner
-     *
-     * @param Registro Se le pasa por parametro un objeto ControlGlucosa
      * @return Devuelve un objeto usuario
      */
-    public static Usuarios crearUsuario(ControlGlucosa Registro) {
+    public static Usuarios crearUsuario() {
         Scanner sc = new Scanner(System.in);
         String confirmacion;
         Usuarios usuario = null;
@@ -274,6 +274,7 @@ public class GlucoApp {
                 System.out.println("Por último, introduzca su centro de salud:");
                 String centro = sc.nextLine();
 
+                System.out.println("");
                 System.out.println("Datos introducidos:");
                 System.out.println("Nombre: " + nombre + "\nEdad: " + edad + "\nPeso: " + peso + "\nDebut: " + debut + "\nCentro de salud: " + centro);
                 System.out.println("");
@@ -282,8 +283,13 @@ public class GlucoApp {
                 confirmacion = sc.nextLine();
 
                 if (confirmacion.equalsIgnoreCase("Si") || confirmacion.equalsIgnoreCase("Sí")) {
+                    System.out.println("Por favor, introduzca la marca de su medidor de glucosa personal:");
+                    String marca = sc.nextLine();
+                    ControlGlucosa control = new ControlGlucosa(marca);
+                    usuario = new Usuarios(nombre, edad, peso, centro, debut, control);
+                    Usuarios.getRegUsuarios().add(usuario);
                     System.out.println("[Usuario creado]");
-                    usuario = new Usuarios(nombre, edad, peso, centro, debut, Registro);
+                    System.out.println("");
                 } else if (confirmacion.equalsIgnoreCase("No")) {
                     System.out.println("Datos incorrectos, reinicie el cuestionario");
                 } else {

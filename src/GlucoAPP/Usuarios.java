@@ -1,8 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package GlucoAPP;
+
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * @author Jorge Pedrajas Rubio
@@ -49,6 +48,11 @@ public class Usuarios {
      * El control de glucosa asociado a este usuario
      */
     private final ControlGlucosa controlGlucosa;
+
+    /**
+     * Registro de usuarios
+     */
+    private static ArrayList<Usuarios> regUsuarios = new ArrayList<>();
 
     /**
      * Constructor de la clase Usuarios.
@@ -179,6 +183,35 @@ public class Usuarios {
      */
     public void cambiarCentroSalud(String centroSalud) {
         this.centroSalud = centroSalud;
+    }
+    
+    /**
+     * Metodo que evuelve el registro de usuarios
+     * @return registro de usuarios
+     */
+
+    public static ArrayList<Usuarios> getRegUsuarios() {
+        return regUsuarios;
+    }
+
+    
+    /**
+     * Metodo que muestra y devuelve los usuarios almacenados para seleccionarlos
+     * @return devuelve el usuario seleccionado
+     */
+    public static Usuarios seleccionarUsuario() {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Seleccione el usuario existente:");
+
+        for (int i = 0; i < regUsuarios.size(); i++) {
+            System.out.println((i + 1) + ". " + regUsuarios.get(i).getNombre());
+        }
+        int opcion = sc.nextInt();
+        sc.nextLine();
+
+        return regUsuarios.get(opcion - 1);
+
     }
 
     /**
