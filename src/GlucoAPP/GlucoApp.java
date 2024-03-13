@@ -11,11 +11,11 @@ package GlucoAPP;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class App_prin {
+public class GlucoApp {
 
     public static void main(String[] args) {
 
-        Control_Glucosa control1 = crearControl();
+        ControlGlucosa control1 = crearControl();
         System.out.println("");
         Usuarios usuario = crearUsuario(control1);
         System.out.println("");
@@ -211,11 +211,11 @@ public class App_prin {
     /**
      * //Crea el objeto de control mediante un cuestionario
      *
-     * @return Devuelve un objeto de tipo Control_Glucosa
+     * @return Devuelve un objeto de tipo ControlGlucosa
      */
-    public static Control_Glucosa crearControl() {
+    public static ControlGlucosa crearControl() {
         Scanner sc = new Scanner(System.in);
-        Control_Glucosa control = null;
+        ControlGlucosa control = null;
         String confirmacion;
 
         System.out.println("[Bienvenido a su registro de glucosa personal]");
@@ -230,7 +230,7 @@ public class App_prin {
                 confirmacion = sc.nextLine();
 
                 if (confirmacion.equalsIgnoreCase("Si") || marca.equalsIgnoreCase("Sí")) {
-                    control = new Control_Glucosa(marca);
+                    control = new ControlGlucosa(marca);
                 } else if (confirmacion.equalsIgnoreCase("No")) {
                     System.out.println("Datos incorrectos, reinicie el cuestionario");
                 } else {
@@ -249,10 +249,10 @@ public class App_prin {
     /**
      * Metodo que crea un usuario mediante Scanner
      *
-     * @param Registro Se le pasa por parametro un objeto Control_Glucosa
+     * @param Registro Se le pasa por parametro un objeto ControlGlucosa
      * @return Devuelve un objeto usuario
      */
-    public static Usuarios crearUsuario(Control_Glucosa Registro) {
+    public static Usuarios crearUsuario(ControlGlucosa Registro) {
         Scanner sc = new Scanner(System.in);
         String confirmacion;
         Usuarios usuario = null;

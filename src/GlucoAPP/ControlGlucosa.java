@@ -11,7 +11,7 @@ package GlucoAPP;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Control_Glucosa {
+public class ControlGlucosa {
 
     /**
      * Número total de controles de glucosa realizados.
@@ -68,7 +68,7 @@ public class Control_Glucosa {
      *
      * @param nombre El nombre del dispositivo de control.
      */
-    public Control_Glucosa(String nombre) {
+    public ControlGlucosa(String nombre) {
         this.nombre = nombre;
         this.fechaCreacion = LocalDateTime.now();
     }

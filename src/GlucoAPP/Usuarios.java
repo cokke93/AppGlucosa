@@ -48,7 +48,7 @@ public class Usuarios {
     /**
      * El control de glucosa asociado a este usuario
      */
-    private final Control_Glucosa controlGlucosa;
+    private final ControlGlucosa controlGlucosa;
 
     /**
      * Constructor de la clase Usuarios.
@@ -58,9 +58,9 @@ public class Usuarios {
      * @param peso El peso del usuario.
      * @param centroSalud El centro de salud del usuario.
      * @param debut La edad en la que el usuario debutó en la diabetes.
-     * @param controlGlucosa El objeto Control_Glucosa asociado al usuario.
+     * @param controlGlucosa El objeto ControlGlucosa asociado al usuario.
      */
-    public Usuarios(String nombre, int edad, double peso, String centroSalud, int debut, Control_Glucosa controlGlucosa) {
+    public Usuarios(String nombre, int edad, double peso, String centroSalud, int debut, ControlGlucosa controlGlucosa) {
 
         this.nombre = nombre;
         this.edad = edad;
@@ -74,11 +74,11 @@ public class Usuarios {
     }
 
     /**
-     * Obtiene el objeto Control_Glucosa asociado a este usuario
+     * Obtiene el objeto ControlGlucosa asociado a este usuario
      *
-     * @return El objeto Control_Glucosa asignado al usuario
+     * @return El objeto ControlGlucosa asignado al usuario
      */
-    public Control_Glucosa getControlGlucosa() {
+    public ControlGlucosa getControlGlucosa() {
         return controlGlucosa;
     }
 
