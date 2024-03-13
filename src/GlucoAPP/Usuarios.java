@@ -186,7 +186,7 @@ public class Usuarios {
      * @return Informacion usuarios
      */
     public String datosUsuario() {
-        return " Datos de usuario\n "
+        return "Datos de usuario\n"
                 + "Nombre: " + nombre + "\n"
                 + "Edad: " + edad + "\n"
                 + "Peso: " + peso + "\n"

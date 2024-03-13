@@ -82,22 +82,27 @@ public class Control_Glucosa {
     public void registrarGlucosa(int glucosa) {
 
         this.glucosa = glucosa;
-        registroAzucar.add(this.glucosa);
-        horasControl.add(LocalDateTime.now());
-        controles++;
 
-        System.out.println("");
-        System.out.println("Glucosa actual: " + this.glucosa);
-        if (this.glucosa >= 200) {
-            System.out.println("Peligro, glucosa ALTA, administrese insulina y midase el azucar otra vez en media hora.");
-            glucosaAlta++;
-        } else if (this.glucosa < 80) {
-            System.out.println("Peligro, glucosa BAJA, administrese carbohidratos rapidos y midase el azucar de nuevo en media hora.");
-            glucosaBaja++;
+        if (glucosa > 0) {
+            registroAzucar.add(this.glucosa);
+            horasControl.add(LocalDateTime.now());
+            controles++;
+
+            System.out.println("");
+            System.out.println("Glucosa actual: " + this.glucosa);
+            if (this.glucosa >= 200) {
+                System.out.println("Peligro, glucosa ALTA, administrese insulina y midase el azucar otra vez en media hora.");
+                glucosaAlta++;
+            } else if (this.glucosa < 80) {
+                System.out.println("Peligro, glucosa BAJA, administrese carbohidratos rapidos y midase el azucar de nuevo en media hora.");
+                glucosaBaja++;
+            } else {
+                System.out.println("Glucosa dentro de rango.");
+                this.glucosaEnRango++;
+            }
+
         } else {
-            System.out.println("Glucosa dentro de rango.");
-            this.glucosaEnRango++;
-
+            System.out.println("Glucosa introducida erronea");
         }
     }
 
@@ -116,9 +121,7 @@ public class Control_Glucosa {
             System.out.println("No hay datos registrados.");
         } else {
             for (int i = 0; i < registroAzucar.size(); i++) {
-                if (registroAzucar.get(i) != 0) {
-                    System.out.printf("%1$tF %1$tT | %2$d%n", horasControl.get(i), registroAzucar.get(i));
-                }
+                System.out.printf("%1$tF %1$tT | %2$d%n", horasControl.get(i), registroAzucar.get(i));
             }
         }
         System.out.println("----------------------------");

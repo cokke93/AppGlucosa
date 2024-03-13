@@ -19,8 +19,7 @@ public class App_prin {
         System.out.println("");
         Usuarios usuario = crearUsuario(control1);
         System.out.println("");
-        menu(usuario);
-        
+        menuPrincipal(usuario);
 
     }
 
@@ -29,23 +28,29 @@ public class App_prin {
      *
      * @param usuario Se pasa por parametro el usuario activo
      */
-    public static void menu(Usuarios usuario) {
+    public static void menuPrincipal(Usuarios usuario) {
         Scanner sc = new Scanner(System.in);
         int opcion = 0;
+        String menu;
 
         do {
             try {
-                System.out.println("-------- Menú GlucoApp --------");
-                System.out.println("1. Registrar niveles de glucosa.");
-                System.out.println("2. Consultar Hba1c / Glucosa media en sangre.");
-                System.out.println("3. Consultar registro de glucosa.");
-                System.out.println("4. Consultar informe general.");
-                System.out.println("5. Limpiar registro de Glucosa.");
-                System.out.println("6. Modificar datos de usuario.");
-                System.out.println("7. Mostrar datos de usuario.");
-                System.out.println("8. Salir.");
-                System.out.println("");
-                System.out.print("Ingrese su opción: ");
+                menu = """
+                       
+        -------- Menú GlucoApp --------
+        1. Registrar niveles de glucosa.
+        2. Consultar Hba1c / Glucosa media en sangre.
+        3. Consultar registro de glucosa.
+        4. Consultar informe general.
+        5. Limpiar registro de Glucosa.
+        6. Modificar datos de usuario.
+        7. Mostrar datos de usuario.
+        8. Salir.
+
+        Ingrese su opción: 
+                       """;
+                System.out.print(menu);
+
                 opcion = sc.nextInt();
                 sc.nextLine();
 
@@ -83,62 +88,8 @@ public class App_prin {
                             System.out.println("");
                         }
                     }
-
                     case 6 -> {
-                        System.out.println("-------- Modificar Datos de Usuario --------");
-                        System.out.println("1. Modificar nombre.");
-                        System.out.println("2. Modificar edad.");
-                        System.out.println("3. Modificar peso.");
-                        System.out.println("4. Cambiar centro de salud.");
-                        System.out.println("5. Volver al menú principal.");
-                        System.out.print("Ingrese su opción: ");
-                        int opcionModificacion = sc.nextInt();
-                        sc.nextLine();
-
-                        switch (opcionModificacion) {
-                            case 1 -> {
-                                System.out.println("Nombre actual: " + usuario.getNombre());
-                                System.out.print("Ingrese el nuevo nombre: ");
-                                String nuevoNombre = sc.nextLine();
-                                usuario.modificarNombre(nuevoNombre);
-                                System.out.println("Nombre modificado correctamente.");
-                                System.out.println("");
-                            }
-                            case 2 -> {
-                                System.out.println("Edad actual: " + usuario.getEdad());
-                                System.out.print("Ingrese la nueva edad: ");
-                                int nuevaEdad = sc.nextInt();
-                                sc.nextLine();
-                                usuario.modificarEdad(nuevaEdad);
-                                System.out.println("Edad modificada correctamente.");
-                                System.out.println("");
-                            }
-                            case 3 -> {
-                                System.out.println("Peso actual: " + usuario.getPeso());
-                                System.out.print("Ingrese el nuevo peso: ");
-                                double nuevoPeso = sc.nextDouble();
-                                sc.nextLine();
-                                usuario.modificarPeso(nuevoPeso);
-                                System.out.println("Peso modificado correctamente.");
-                                System.out.println("");
-                            }
-                            case 4 -> {
-                                System.out.println("Centro de salud actual: " + usuario.getCentroSalud());
-                                System.out.print("Ingrese el nuevo centro de salud: ");
-                                String nuevoCentroSalud = sc.nextLine();
-                                usuario.cambiarCentroSalud(nuevoCentroSalud);
-                                System.out.println("Centro de salud modificado correctamente.");
-                                System.out.println("");
-                            }
-                            case 5 -> {
-                                System.out.println("Volviendo al menú principal.");
-                                System.out.println("");
-                            }
-                            default -> {
-                                System.out.println("Opción incorrecta. Por favor, ingrese una opción válida.");
-                                System.out.println("");
-                            }
-                        }
+                        menuUsuario(usuario);
                         break;
                     }
                     case 7 -> {
@@ -174,6 +125,86 @@ public class App_prin {
         } while (opcion != 9);
         System.out.println("");
         sc.close();
+
+    }
+
+    /**
+     * Metodo que contiene el menu para modificar y consultar datos de usuarios
+     *
+     * @param usuario Se le pasa por parametro el usuario introducido desde el
+     * menu principal
+     */
+    public static void menuUsuario(Usuarios usuario) {
+
+        Scanner sc = new Scanner(System.in);
+        String menuUsuario;
+        try {
+            menuUsuario = """
+                               -------- Modificar Datos de Usuario --------
+                               1. Modificar nombre.
+                               2. Modificar edad.
+                               3. Modificar peso.
+                               4. Cambiar centro de salud.
+                               5. Volver al menú principal.
+
+                               Ingrese su opción: 
+                                                       """;
+            System.out.print(menuUsuario);
+
+            int opcionModificacion = sc.nextInt();
+            sc.nextLine();
+
+            switch (opcionModificacion) {
+                case 1 -> {
+                    System.out.println("Nombre actual: " + usuario.getNombre());
+                    System.out.print("Ingrese el nuevo nombre: ");
+                    String nuevoNombre = sc.nextLine();
+                    usuario.modificarNombre(nuevoNombre);
+                    System.out.println("Nombre modificado correctamente.");
+                    System.out.println("");
+                }
+                case 2 -> {
+                    System.out.println("Edad actual: " + usuario.getEdad());
+                    System.out.print("Ingrese la nueva edad: ");
+                    int nuevaEdad = sc.nextInt();
+                    sc.nextLine();
+                    usuario.modificarEdad(nuevaEdad);
+                    System.out.println("Edad modificada correctamente.");
+                    System.out.println("");
+                }
+                case 3 -> {
+                    System.out.println("Peso actual: " + usuario.getPeso());
+                    System.out.print("Ingrese el nuevo peso: ");
+                    double nuevoPeso = sc.nextDouble();
+                    sc.nextLine();
+                    usuario.modificarPeso(nuevoPeso);
+                    System.out.println("Peso modificado correctamente.");
+                    System.out.println("");
+                }
+                case 4 -> {
+                    System.out.println("Centro de salud actual: " + usuario.getCentroSalud());
+                    System.out.print("Ingrese el nuevo centro de salud: ");
+                    String nuevoCentroSalud = sc.nextLine();
+                    usuario.cambiarCentroSalud(nuevoCentroSalud);
+                    System.out.println("Centro de salud modificado correctamente.");
+                    System.out.println("");
+                }
+                case 5 -> {
+                    System.out.println("Volviendo al menú principal.");
+                    System.out.println("");
+                }
+                default -> {
+                    System.out.println("Opción incorrecta. Por favor, ingrese una opción válida.");
+                    System.out.println("");
+                }
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("");
+            System.out.println("Opción incorrecta. Por favor, ingrese una opción válida.");
+            System.out.println("");
+            sc.nextLine();
+
+        }
 
     }
 
