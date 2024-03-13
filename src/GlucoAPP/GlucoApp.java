@@ -96,45 +96,27 @@ public class GlucoApp {
 
                 switch (opcion) {
                     case 1 -> {
-                        System.out.print("Ingrese el nivel de glucosa: ");
-                        int nivelGlucosa = sc.nextInt();
-                        usuario.getControlGlucosa().registrarGlucosa(nivelGlucosa);
-                        System.out.println("Nivel de glucosa registrado.");
-                        System.out.println("");
+
+                        usuario.getControlGlucosa().registrarGlucosa(); //Registrar glucosa
                     }
                     case 2 -> {
-                        System.out.println("--------- Glucosa media ---------");
-                        System.out.println(usuario.getControlGlucosa().mediaGlucosa());
-                        System.out.println("");
+                        System.out.println(usuario.getControlGlucosa().mediaGlucosa()); //Media glucosa
                     }
                     case 3 -> {
-                        usuario.getControlGlucosa().consultarHistorial();
-                        System.out.println("");
+                        usuario.getControlGlucosa().consultarHistorial(); //Consultar historial
                     }
                     case 4 -> {
-                        System.out.println("--------- Informe general ---------");
-                        System.out.println(usuario.getControlGlucosa().informeGeneral());
-                        System.out.println("");
+                        System.out.println(usuario.getControlGlucosa().informeGeneral()); //Mostrar informe general
                     }
                     case 5 -> {
-                        System.out.println("¿Estás seguro de que deseas reiniciar el registro? Esto borrará todos los datos almacenados. (Si/No)");
-                        String confirmacion = sc.nextLine();
-                        if (confirmacion.equalsIgnoreCase("Si") || confirmacion.equalsIgnoreCase("Sí")) {
-                            usuario.getControlGlucosa().limpiarRegistro();
-                            System.out.println("Registro reinicializado.");
-                            System.out.println("");
-                        } else {
-                            System.out.println("Operación cancelada.");
-                            System.out.println("");
-                        }
+                        usuario.getControlGlucosa().limpiarRegistro(); //Limpiar el registro de glucosa
                     }
                     case 6 -> {
-                        menuUsuario(usuario);
+                        menuUsuario(usuario); //Acceder al menu de usuario
                         break;
                     }
                     case 7 -> {
-                        System.out.println(usuario.datosUsuario());
-                        System.out.println("");
+                        System.out.println(usuario.datosUsuario()); //Acceder a los datos de usuario
                     }
                     case 8 -> {
                         System.out.println("¿Desea salir de la aplicación? (Si/No)");
@@ -195,38 +177,16 @@ public class GlucoApp {
 
             switch (opcionModificacion) {
                 case 1 -> {
-                    System.out.println("Nombre actual: " + usuario.getNombre());
-                    System.out.print("Ingrese el nuevo nombre: ");
-                    String nuevoNombre = sc.nextLine();
-                    usuario.modificarNombre(nuevoNombre);
-                    System.out.println("Nombre modificado correctamente.");
-                    System.out.println("");
+                    usuario.modificarNombre(); //Modifica el nombre del usuario
                 }
                 case 2 -> {
-                    System.out.println("Edad actual: " + usuario.getEdad());
-                    System.out.print("Ingrese la nueva edad: ");
-                    int nuevaEdad = sc.nextInt();
-                    sc.nextLine();
-                    usuario.modificarEdad(nuevaEdad);
-                    System.out.println("Edad modificada correctamente.");
-                    System.out.println("");
+                    usuario.modificarEdad(); //Modifica la edad del usuario
                 }
                 case 3 -> {
-                    System.out.println("Peso actual: " + usuario.getPeso());
-                    System.out.print("Ingrese el nuevo peso: ");
-                    double nuevoPeso = sc.nextDouble();
-                    sc.nextLine();
-                    usuario.modificarPeso(nuevoPeso);
-                    System.out.println("Peso modificado correctamente.");
-                    System.out.println("");
+                    usuario.modificarPeso(); //Modifica el peso del usuario
                 }
                 case 4 -> {
-                    System.out.println("Centro de salud actual: " + usuario.getCentroSalud());
-                    System.out.print("Ingrese el nuevo centro de salud: ");
-                    String nuevoCentroSalud = sc.nextLine();
-                    usuario.cambiarCentroSalud(nuevoCentroSalud);
-                    System.out.println("Centro de salud modificado correctamente.");
-                    System.out.println("");
+                    usuario.cambiarCentroSalud(); //Modifica el centro de salud
                 }
                 case 5 -> {
                     System.out.println("Volviendo al menú principal.");
@@ -285,11 +245,13 @@ public class GlucoApp {
                 if (confirmacion.equalsIgnoreCase("Si") || confirmacion.equalsIgnoreCase("Sí")) {
                     System.out.println("Por favor, introduzca la marca de su medidor de glucosa personal:");
                     String marca = sc.nextLine();
+
                     ControlGlucosa control = new ControlGlucosa(marca);
                     usuario = new Usuarios(nombre, edad, peso, centro, debut, control);
                     Usuarios.getRegUsuarios().add(usuario);
                     System.out.println("[Usuario creado]");
                     System.out.println("");
+
                 } else if (confirmacion.equalsIgnoreCase("No")) {
                     System.out.println("Datos incorrectos, reinicie el cuestionario");
                 } else {

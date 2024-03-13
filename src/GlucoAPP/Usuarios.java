@@ -152,51 +152,82 @@ public class Usuarios {
     /**
      * Modifica el nombre del usuario.
      *
-     * @param nombre El nuevo nombre del usuario.
+     *
      */
-    public void modificarNombre(String nombre) {
-        this.nombre = nombre;
+    public void modificarNombre() {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Nombre actual: " + this.nombre);
+        System.out.print("Ingrese el nuevo nombre: ");
+        String nuevoNombre = sc.nextLine();
+        this.nombre = nuevoNombre;
+        System.out.println("Nombre modificado correctamente.");
+        System.out.println("");
     }
 
     /**
      * Modifica la edad del usuario.
      *
-     * @param edad La nueva edad del usuario.
      */
-    public void modificarEdad(int edad) {
-        this.edad = edad;
+    public void modificarEdad() {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Edad actual: " + this.edad);
+        System.out.print("Ingrese la nueva edad: ");
+        int nuevaEdad = sc.nextInt();
+        sc.nextLine();
+        this.edad = nuevaEdad;
+        System.out.println("Edad modificada correctamente.");
+        System.out.println("");
+
     }
 
     /**
      * Modifica el peso del usuario.
      *
-     * @param peso El nuevo peso del usuario.
      */
-    public void modificarPeso(double peso) {
-        this.peso = peso;
+    public void modificarPeso() {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Peso actual: " + this.peso);
+        System.out.print("Ingrese el nuevo peso: ");
+        double nuevoPeso = sc.nextDouble();
+        sc.nextLine();
+        this.peso = nuevoPeso;
+        System.out.println("Peso modificado correctamente.");
+        System.out.println("");
+
     }
 
     /**
      * Cambia el centro de salud del usuario.
      *
-     * @param centroSalud El nuevo centro de salud del usuario.
      */
-    public void cambiarCentroSalud(String centroSalud) {
-        this.centroSalud = centroSalud;
+    public void cambiarCentroSalud() {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Centro de salud actual: " + this.centroSalud);
+        System.out.print("Ingrese el nuevo centro de salud: ");
+        String nuevoCentroSalud = sc.nextLine();
+        this.centroSalud = nuevoCentroSalud;
+        System.out.println("Centro de salud modificado correctamente.");
+        System.out.println("");
+
     }
-    
+
     /**
      * Metodo que evuelve el registro de usuarios
+     *
      * @return registro de usuarios
      */
-
     public static ArrayList<Usuarios> getRegUsuarios() {
         return regUsuarios;
     }
 
-    
     /**
-     * Metodo que muestra y devuelve los usuarios almacenados para seleccionarlos
+     * Metodo que muestra y devuelve los usuarios almacenados para
+     * seleccionarlos
+     *
      * @return devuelve el usuario seleccionado
      */
     public static Usuarios seleccionarUsuario() {

@@ -10,6 +10,7 @@ package GlucoAPP;
  */
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ControlGlucosa {
 
@@ -66,7 +67,7 @@ public class ControlGlucosa {
     /**
      * Constructor de la clase Control_Glucosa.
      *
-     * @param nombre El nombre del dispositivo de control.
+     * @param marca El nombre del dispositivo de control.
      */
     public ControlGlucosa(String marca) {
         this.marca = marca;
@@ -77,9 +78,11 @@ public class ControlGlucosa {
      * Metodo que registra la glucosa del usuario y devuelve un mensaje conforme
      * al nivel de esta
      *
-     * @param glucosa La glucosa actual del usuario
      */
-    public void registrarGlucosa(int glucosa) {
+    public void registrarGlucosa() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Ingrese el nivel de glucosa: ");
+        int glucosa = sc.nextInt();
 
         this.glucosa = glucosa;
 
@@ -103,7 +106,10 @@ public class ControlGlucosa {
 
         } else {
             System.out.println("Glucosa introducida erronea");
+            return;
         }
+        System.out.println("Nivel de glucosa registrado");
+        System.out.println("");
     }
 
     /**
@@ -166,6 +172,8 @@ public class ControlGlucosa {
             }
 
             this.glucosaMedia = mediaGlucosa / this.controles;
+            System.out.println("");
+            System.out.println("--------- Glucosa media ---------");
 
             if (this.glucosaMedia >= 300) {
                 return "Tu media de Glucosa es: " + glucosaMedia + " HbA1c estimada: 16-21 - Peligro, media de glucosa muy alta!";
@@ -191,26 +199,37 @@ public class ControlGlucosa {
      * @return Devuelve datos generales del control de usuario
      */
     public String informeGeneral() {
-        return "Nombre del dispositivo de control: " + this.marca
-                + "\nFecha de creacion del registro: " + this.fechaCreacion
-                + "\nControles totales realizados: " + this.controles
-                + "\nEventos de Glucosa Baja: " + this.glucosaBaja
-                + "\nEventos de Glucosa Alta: " + this.glucosaAlta
-                + "\nMediciones de Glucosa en rango: " + this.glucosaEnRango
-                + "\n" + mediaGlucosa();
+        return "--------- Informe general ---------\n"
+                + "Nombre del dispositivo de control: " + this.marca + "\n"
+                + "Fecha de creacion del registro: " + this.fechaCreacion + "\n"
+                + "Controles totales realizados: " + this.controles + "\n"
+                + "Eventos de Glucosa Baja: " + this.glucosaBaja + "\n"
+                + "Eventos de Glucosa Alta: " + this.glucosaAlta + "\n"
+                + "Mediciones de Glucosa en rango: " + this.glucosaEnRango + "\n"
+                + mediaGlucosa();
     }
 
     /**
      * Metodo que limpia el registro de glucosa dejando los valores a 0
      */
     public void limpiarRegistro() {
+        Scanner sc = new Scanner(System.in);
 
-        this.controles = 0;
-        this.glucosaAlta = 0;
-        this.glucosaBaja = 0;
-        this.glucosaEnRango = 0;
-        registroAzucar.clear();
-        horasControl.clear();
+        System.out.println("¿Estás seguro de que deseas reiniciar el registro? Esto borrará todos los datos almacenados. (Si/No)");
+        String confirmacion = sc.nextLine();
+        if (confirmacion.equalsIgnoreCase("Si") || confirmacion.equalsIgnoreCase("Sí")) {
+            this.controles = 0;
+            this.glucosaAlta = 0;
+            this.glucosaBaja = 0;
+            this.glucosaEnRango = 0;
+            registroAzucar.clear();
+            horasControl.clear();
+            System.out.println("Registro reinicializado.");
+            System.out.println("");
+        } else {
+            System.out.println("Operación cancelada.");
+            System.out.println("");
+        }
 
     }
 }
