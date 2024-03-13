@@ -8,8 +8,8 @@ package GlucoAPP;
  * @author Jorge Pedrajas Rubio
  * @version 1.0.0 27 feb 2024 18:02:40
  */
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Control_Glucosa {
 
@@ -51,7 +51,7 @@ public class Control_Glucosa {
     /**
      * Fecha de creación del registro.
      */
-    private final Date fechaCreacion;
+    private final LocalDateTime fechaCreacion;
 
     /**
      * Registro de valores de azúcar en la sangre.
@@ -61,7 +61,7 @@ public class Control_Glucosa {
     /**
      * Registro de fechas y horas de control de glucosa.
      */
-    private final ArrayList<Date> horasControl = new ArrayList();
+    private final ArrayList<LocalDateTime> horasControl = new ArrayList();
 
     /**
      * Constructor de la clase Control_Glucosa.
@@ -70,7 +70,7 @@ public class Control_Glucosa {
      */
     public Control_Glucosa(String nombre) {
         this.nombre = nombre;
-        this.fechaCreacion = new Date();
+        this.fechaCreacion = LocalDateTime.now();
     }
 
     /**
@@ -83,7 +83,7 @@ public class Control_Glucosa {
 
         this.glucosa = glucosa;
         registroAzucar.add(this.glucosa);
-        horasControl.add(new Date());
+        horasControl.add(LocalDateTime.now());
         controles++;
 
         System.out.println("");
