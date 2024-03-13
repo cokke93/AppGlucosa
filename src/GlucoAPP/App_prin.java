@@ -123,7 +123,7 @@ public class App_prin {
                                 System.out.println("");
                             }
                             case 4 -> {
-                                System.out.println("Centro de salud actual: " + usuario.getCentro_de_salud());
+                                System.out.println("Centro de salud actual: " + usuario.getCentroSalud());
                                 System.out.print("Ingrese el nuevo centro de salud: ");
                                 String nuevoCentroSalud = sc.nextLine();
                                 usuario.cambiarCentroSalud(nuevoCentroSalud);

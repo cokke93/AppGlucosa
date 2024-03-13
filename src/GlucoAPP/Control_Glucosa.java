@@ -26,22 +26,22 @@ public class Control_Glucosa {
     /**
      * Número de eventos de glucosa baja.
      */
-    private int glucosa_baja;
+    private int glucosaAlta;
 
     /**
      * Número de eventos de glucosa alta.
      */
-    private int glucosa_alta;
+    private int glucosaBaja;
 
     /**
      * Número de eventos de glucosa dentro del rango normal.
      */
-    private int glucosa_en_rango;
+    private int glucosaEnRango;
 
     /**
      * Valor medio de la glucosa.
      */
-    private int glucosa_media;
+    private int glucosaMedia;
 
     /**
      * Nombre del dispositivo de control.
@@ -51,7 +51,7 @@ public class Control_Glucosa {
     /**
      * Fecha de creación del registro.
      */
-    private final Date fecha_creacion;
+    private final Date fechaCreacion;
 
     /**
      * Registro de valores de azúcar en la sangre.
@@ -70,7 +70,7 @@ public class Control_Glucosa {
      */
     public Control_Glucosa(String nombre) {
         this.nombre = nombre;
-        this.fecha_creacion = new Date();
+        this.fechaCreacion = new Date();
     }
 
     /**
@@ -86,16 +86,17 @@ public class Control_Glucosa {
         horasControl.add(new Date());
         controles++;
 
+        System.out.println("");
         System.out.println("Glucosa actual: " + this.glucosa);
         if (this.glucosa >= 200) {
             System.out.println("Peligro, glucosa ALTA, administrese insulina y midase el azucar otra vez en media hora.");
-            glucosa_alta++;
+            glucosaAlta++;
         } else if (this.glucosa < 80) {
             System.out.println("Peligro, glucosa BAJA, administrese carbohidratos rapidos y midase el azucar de nuevo en media hora.");
-            glucosa_baja++;
+            glucosaBaja++;
         } else {
             System.out.println("Glucosa dentro de rango.");
-            this.glucosa_en_rango++;
+            this.glucosaEnRango++;
 
         }
     }
@@ -128,7 +129,7 @@ public class Control_Glucosa {
      */
     public void vecesBaja() {
 
-        System.out.println("Eventos totales de gluocosa baja: " + this.glucosa_baja);
+        System.out.println("Eventos totales de gluocosa baja: " + this.glucosaBaja);
     }
 
     /**
@@ -136,7 +137,7 @@ public class Control_Glucosa {
      */
     public void vecesAlta() {
 
-        System.out.println("Eventos totales de gluocosa alta: " + this.glucosa_alta);
+        System.out.println("Eventos totales de gluocosa alta: " + this.glucosaAlta);
     }
 
     /**
@@ -144,7 +145,7 @@ public class Control_Glucosa {
      */
     public void enRango() {
 
-        System.out.println("Eventos totales de Glucosa optimos: " + this.glucosa_en_rango);
+        System.out.println("Eventos totales de Glucosa optimos: " + this.glucosaEnRango);
     }
 
     /**
@@ -161,16 +162,16 @@ public class Control_Glucosa {
                 mediaGlucosa += registroAzucar.get(i);
             }
 
-            this.glucosa_media = mediaGlucosa / this.controles;
+            this.glucosaMedia = mediaGlucosa / this.controles;
 
-            if (this.glucosa_media >= 300) {
-                return "Tu media de Glucosa es: " + glucosa_media + " HbA1c estimada: 16-21 - Peligro, media de glucosa muy alta!";
-            } else if (this.glucosa_media >= 200 && this.glucosa_media < 300) {
-                return "Tu media de Glucosa es: " + glucosa_media + " HbA1c estimada: 10-16 - Media de glucosa alta, cuida la alimentación";
-            } else if (this.glucosa_media > 150 && this.glucosa_media < 200) {
-                return "Tu media de Glucosa es: " + glucosa_media + " HbA1c estimada: 8-10 - Media de glucosa normal, sigue así!";
-            } else if (this.glucosa_media > 70 && this.glucosa_media <= 150) {
-                return "Tu media de Glucosa es: " + glucosa_media + " HbA1c estimada: 2-7 - Media en buen rango, genial!!!";
+            if (this.glucosaMedia >= 300) {
+                return "Tu media de Glucosa es: " + glucosaMedia + " HbA1c estimada: 16-21 - Peligro, media de glucosa muy alta!";
+            } else if (this.glucosaMedia >= 200 && this.glucosaMedia < 300) {
+                return "Tu media de Glucosa es: " + glucosaMedia + " HbA1c estimada: 10-16 - Media de glucosa alta, cuida la alimentación";
+            } else if (this.glucosaMedia > 150 && this.glucosaMedia < 200) {
+                return "Tu media de Glucosa es: " + glucosaMedia + " HbA1c estimada: 8-10 - Media de glucosa normal, sigue así!";
+            } else if (this.glucosaMedia > 70 && this.glucosaMedia <= 150) {
+                return "Tu media de Glucosa es: " + glucosaMedia + " HbA1c estimada: 2-7 - Media en buen rango, genial!!!";
             } else {
                 return "Fuera de rango.";
             }
@@ -188,11 +189,11 @@ public class Control_Glucosa {
      */
     public String informeGeneral() {
         return "Nombre del dispositivo de control: " + this.nombre
-                + "\nFecha de creacion del registro: " + this.fecha_creacion
+                + "\nFecha de creacion del registro: " + this.fechaCreacion
                 + "\nControles totales realizados: " + this.controles
-                + "\nEventos de Glucosa Baja: " + this.glucosa_baja
-                + "\nEventos de Glucosa Alta: " + this.glucosa_alta
-                + "\nMediciones de Glucosa en rango: " + this.glucosa_en_rango
+                + "\nEventos de Glucosa Baja: " + this.glucosaBaja
+                + "\nEventos de Glucosa Alta: " + this.glucosaAlta
+                + "\nMediciones de Glucosa en rango: " + this.glucosaEnRango
                 + "\n" + mediaGlucosa();
     }
 
@@ -202,9 +203,9 @@ public class Control_Glucosa {
     public void limpiarRegistro() {
 
         this.controles = 0;
-        this.glucosa_alta = 0;
-        this.glucosa_baja = 0;
-        this.glucosa_en_rango = 0;
+        this.glucosaAlta = 0;
+        this.glucosaBaja = 0;
+        this.glucosaEnRango = 0;
         registroAzucar.clear();
         horasControl.clear();
 

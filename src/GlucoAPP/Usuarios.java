@@ -28,22 +28,22 @@ public class Usuarios {
     /**
      * El centro de salud del usuario
      */
-    private String centro_de_salud;
+    private String centroSalud;
 
     /**
-     * La edad en la que el usuario debutó
+     * La edad en la que el usuario tuvo su debut diabético
      */
     private final int debut;
 
     /**
      * El ID único del usuario
      */
-    private int id_usuario = 0;
+    private int idUsuario = 0;
 
     /**
      * El número total de usuarios creados
      */
-    private static int total_usuarios;
+    private static int totalUsuarios;
 
     /**
      * El control de glucosa asociado a este usuario
@@ -56,19 +56,19 @@ public class Usuarios {
      * @param nombre El nombre del usuario.
      * @param edad La edad del usuario.
      * @param peso El peso del usuario.
-     * @param centro_de_salud El centro de salud del usuario.
-     * @param debut La edad en la que el usuario debutó.
+     * @param centroSalud El centro de salud del usuario.
+     * @param debut La edad en la que el usuario debutó en la diabetes.
      * @param controlGlucosa El objeto Control_Glucosa asociado al usuario.
      */
-    public Usuarios(String nombre, int edad, double peso, String centro_de_salud, int debut, Control_Glucosa controlGlucosa) {
+    public Usuarios(String nombre, int edad, double peso, String centroSalud, int debut, Control_Glucosa controlGlucosa) {
 
         this.nombre = nombre;
         this.edad = edad;
         this.peso = peso;
-        this.centro_de_salud = centro_de_salud;
+        this.centroSalud = centroSalud;
         this.debut = debut;
-        total_usuarios++;
-        this.id_usuario = total_usuarios;
+        totalUsuarios++;
+        this.idUsuario = totalUsuarios;
         this.controlGlucosa = controlGlucosa;
 
     }
@@ -114,8 +114,8 @@ public class Usuarios {
      *
      * @return El centro de salud del usuario.
      */
-    public String getCentro_de_salud() {
-        return centro_de_salud;
+    public String getCentroSalud() {
+        return centroSalud;
     }
 
     /**
@@ -132,8 +132,8 @@ public class Usuarios {
      *
      * @return El ID del usuario.
      */
-    public int getId_usuario() {
-        return id_usuario;
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
     /**
@@ -141,8 +141,8 @@ public class Usuarios {
      *
      * @return El número total de usuarios creados.
      */
-    public static int getTotal_usuarios() {
-        return total_usuarios;
+    public static int getTotalUsuarios() {
+        return totalUsuarios;
     }
 
     /**
@@ -175,26 +175,25 @@ public class Usuarios {
     /**
      * Cambia el centro de salud del usuario.
      *
-     * @param centro_de_salud El nuevo centro de salud del usuario.
+     * @param centroSalud El nuevo centro de salud del usuario.
      */
-    public void cambiarCentroSalud(String centro_de_salud) {
-        this.centro_de_salud = centro_de_salud;
+    public void cambiarCentroSalud(String centroSalud) {
+        this.centroSalud = centroSalud;
     }
 
     /**
-     * 
+     *
      * @return Informacion usuarios
      */
     public String datosUsuario() {
-        return "Datos de usuario\n"
+        return " Datos de usuario\n "
                 + "Nombre: " + nombre + "\n"
                 + "Edad: " + edad + "\n"
                 + "Peso: " + peso + "\n"
-                + "Centro de salud: " + centro_de_salud + "\n"
-                + "Edad de debut: " + debut + "\n"
-                + "NºUsuario: " + id_usuario;
-                
-                
+                + "Centro de salud: " + centroSalud + "\n"
+                + "Edad de debut diabético: " + debut + "\n"
+                + "NºUsuario: " + idUsuario;
+
     }
 
 }
