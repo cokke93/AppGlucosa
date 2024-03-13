@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package javaapplication20;
+package GlucoAPP;
 
 /**
  * @author Jorge Pedrajas Rubio
  * @version 1.0.0 27 feb 2024 18:02:40
  */
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Control_Glucosa {
@@ -56,12 +56,12 @@ public class Control_Glucosa {
     /**
      * Registro de valores de azúcar en la sangre.
      */
-    private final int[] registro_azucar = new int[200];
+    private final ArrayList<Integer> registroAzucar = new ArrayList();
 
     /**
      * Registro de fechas y horas de control de glucosa.
      */
-    private final Date[] horasControl = new Date[200];
+    private final ArrayList<Date> horasControl = new ArrayList();
 
     /**
      * Constructor de la clase Control_Glucosa.
@@ -81,25 +81,22 @@ public class Control_Glucosa {
      */
     public void registrarGlucosa(int glucosa) {
 
-        if (controles < registro_azucar.length && controles < horasControl.length) {
-            this.glucosa = glucosa;
-            registro_azucar[controles] = this.glucosa;
-            horasControl[controles] = new Date();
-            controles++;
+        this.glucosa = glucosa;
+        registroAzucar.add(this.glucosa);
+        horasControl.add(new Date());
+        controles++;
 
-            System.out.println("Glucosa actual: " + this.glucosa);
-            if (this.glucosa >= 200) {
-                System.out.println("Peligro, glucosa ALTA, administrese insulina y midase el azucar otra vez en media hora.");
-                glucosa_alta++;
-            } else if (this.glucosa < 80) {
-                System.out.println("Peligro, glucosa BAJA, administrese carbohidratos rapidos y midase el azucar de nuevo en media hora.");
-                glucosa_baja++;
-            } else {
-                System.out.println("Glucosa dentro de rango.");
-                this.glucosa_en_rango++;
-            }
+        System.out.println("Glucosa actual: " + this.glucosa);
+        if (this.glucosa >= 200) {
+            System.out.println("Peligro, glucosa ALTA, administrese insulina y midase el azucar otra vez en media hora.");
+            glucosa_alta++;
+        } else if (this.glucosa < 80) {
+            System.out.println("Peligro, glucosa BAJA, administrese carbohidratos rapidos y midase el azucar de nuevo en media hora.");
+            glucosa_baja++;
         } else {
-            System.out.println("No se pueden registrar más controles. Se ha alcanzado el límite de almacenamiento.");
+            System.out.println("Glucosa dentro de rango.");
+            this.glucosa_en_rango++;
+
         }
     }
 
@@ -108,16 +105,19 @@ public class Control_Glucosa {
      */
     public void consultarHistorial() {
 
+        System.out.println("");
         System.out.println("Historial de glucosa:");
         System.out.println("----------------------------");
         System.out.println("Fecha               | Glucosa");
         System.out.println("----------------------------");
-        for (int i = 0; i < registro_azucar.length; i++) {
-            if (registro_azucar[i] != 0) {
-                System.out.printf("%1$tF %1$tT | %2$d%n", horasControl[i], registro_azucar[i]);
-            } else if (registro_azucar[0] == 0) {
-                System.out.println("No hay datos registrados.");
-                break;
+
+        if (registroAzucar.isEmpty()) {
+            System.out.println("No hay datos registrados.");
+        } else {
+            for (int i = 0; i < registroAzucar.size(); i++) {
+                if (registroAzucar.get(i) != 0) {
+                    System.out.printf("%1$tF %1$tT | %2$d%n", horasControl.get(i), registroAzucar.get(i));
+                }
             }
         }
         System.out.println("----------------------------");
@@ -158,7 +158,7 @@ public class Control_Glucosa {
 
         try {
             for (int i = 0; i < controles; i++) {
-                mediaGlucosa += registro_azucar[i];
+                mediaGlucosa += registroAzucar.get(i);
             }
 
             this.glucosa_media = mediaGlucosa / this.controles;
@@ -205,7 +205,8 @@ public class Control_Glucosa {
         this.glucosa_alta = 0;
         this.glucosa_baja = 0;
         this.glucosa_en_rango = 0;
-        Arrays.fill(registro_azucar, 0);
-        Arrays.fill(horasControl, null);
+        registroAzucar.clear();
+        horasControl.clear();
+
     }
 }
