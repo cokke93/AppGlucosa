@@ -156,16 +156,15 @@ public class ControlGlucosa {
 
             this.glucosaMedia = mediaGlucosa / this.controles;
             System.out.println("");
-            System.out.println("--------- Glucosa media ---------");
 
             if (this.glucosaMedia >= 300) {
-                return "Tu media de Glucosa es: " + glucosaMedia + " HbA1c estimada: 16-21 - Peligro, media de glucosa muy alta!";
+                return "Tu media de Glucosa es: " + glucosaMedia + "\nHbA1c estimada: 16-21 \nPeligro, media de glucosa muy alta!";
             } else if (this.glucosaMedia >= 200 && this.glucosaMedia < 300) {
-                return "Tu media de Glucosa es: " + glucosaMedia + " HbA1c estimada: 10-16 - Media de glucosa alta, cuida la alimentación";
+                return "Tu media de Glucosa es: " + glucosaMedia + "\nHbA1c estimada: 10-16 \nMedia de glucosa alta, cuida la alimentación";
             } else if (this.glucosaMedia > 150 && this.glucosaMedia < 200) {
-                return "Tu media de Glucosa es: " + glucosaMedia + " HbA1c estimada: 8-10 - Media de glucosa normal, sigue así!";
+                return "Tu media de Glucosa es: " + glucosaMedia + "\nHbA1c estimada: 8-10 \nMedia de glucosa normal, sigue así!";
             } else if (this.glucosaMedia > 70 && this.glucosaMedia <= 150) {
-                return "Tu media de Glucosa es: " + glucosaMedia + " HbA1c estimada: 2-7 - Media en buen rango, genial!!!";
+                return "Tu media de Glucosa es: " + glucosaMedia + "\nHbA1c estimada: 2-7 \nMedia en buen rango, genial!!!";
             } else {
                 return "Fuera de rango.";
             }

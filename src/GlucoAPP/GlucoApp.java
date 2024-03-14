@@ -14,7 +14,10 @@ public class GlucoApp {
         menuInicio();
 
     }
-
+    
+ /**
+  * Menu inicial de la aplicación
+  */
     public static void menuInicio() {
 
         Scanner sc = new Scanner(System.in);
@@ -214,7 +217,6 @@ public class GlucoApp {
      */
     public static Usuarios crearUsuario() {
         Scanner sc = new Scanner(System.in);
-        String confirmacion;
         Usuarios usuario = null;
 
         do {
@@ -240,14 +242,12 @@ public class GlucoApp {
                 System.out.println("");
 
                 System.out.println("¿Los datos son correctos? (Si/No)");
-                confirmacion = sc.nextLine();
+                String confirmacion = sc.nextLine();
 
                 if (confirmacion.equalsIgnoreCase("Si") || confirmacion.equalsIgnoreCase("Sí")) {
                     System.out.println("Por favor, introduzca la marca de su medidor de glucosa personal:");
                     String marca = sc.nextLine();
-
-                    ControlGlucosa control = new ControlGlucosa(marca);
-                    usuario = new Usuarios(nombre, edad, peso, centro, debut, control);
+                    usuario = new Usuarios(nombre, edad, peso, centro, debut, marca);
                     Usuarios.getRegUsuarios().add(usuario);
                     System.out.println("[Usuario creado]");
                     System.out.println("");

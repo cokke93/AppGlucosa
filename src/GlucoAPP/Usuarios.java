@@ -62,9 +62,9 @@ public class Usuarios {
      * @param peso El peso del usuario.
      * @param centroSalud El centro de salud del usuario.
      * @param debut La edad en la que el usuario debutó en la diabetes.
-     * @param controlGlucosa El objeto ControlGlucosa asociado al usuario.
+     * @param marca del aparato de control del usuario.
      */
-    public Usuarios(String nombre, int edad, double peso, String centroSalud, int debut, ControlGlucosa controlGlucosa) {
+    public Usuarios(String nombre, int edad, double peso, String centroSalud, int debut, String marca) {
 
         this.nombre = nombre;
         this.edad = edad;
@@ -73,7 +73,7 @@ public class Usuarios {
         this.debut = debut;
         totalUsuarios++;
         this.idUsuario = totalUsuarios;
-        this.controlGlucosa = controlGlucosa;
+        this.controlGlucosa = new ControlGlucosa(marca);
 
     }
 
@@ -250,13 +250,13 @@ public class Usuarios {
      * @return Informacion usuarios
      */
     public String datosUsuario() {
-        return "Datos de usuario\n"
-                + "Nombre: " + nombre + "\n"
-                + "Edad: " + edad + "\n"
-                + "Peso: " + peso + "\n"
-                + "Centro de salud: " + centroSalud + "\n"
-                + "Edad de debut diabético: " + debut + "\n"
-                + "NºUsuario: " + idUsuario;
+        return "--------- Datos Usuario ---------\n"
+                + "Nombre: " + this.nombre + "\n"
+                + "Edad: " + this.edad + "\n"
+                + "Peso: " + this.peso + "\n"
+                + "Centro de salud: " + this.centroSalud + "\n"
+                + "Edad de debut diabético: " + this.debut + "\n"
+                + "NºUsuario: " + this.idUsuario;
 
     }
 
