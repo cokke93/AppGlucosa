@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package GlucoAPP;
 
 /**
@@ -134,27 +130,14 @@ public class ControlGlucosa {
     }
 
     /**
-     * Metodo que devuelve el numero de eventos de glucosa baja registrados
+     * Metodo que devuelve el numero de eventos de glucosa registrados
+     *
+     * @return Eventos glucosa
      */
-    public void vecesBaja() {
-
-        System.out.println("Eventos totales de gluocosa baja: " + this.glucosaBaja);
-    }
-
-    /**
-     * Metodo que devuelve el numero de eventos de glucosa alta registrados
-     */
-    public void vecesAlta() {
-
-        System.out.println("Eventos totales de gluocosa alta: " + this.glucosaAlta);
-    }
-
-    /**
-     * Metodo que devuelve el numero de eventos de glucosa en rango registrados
-     */
-    public void enRango() {
-
-        System.out.println("Eventos totales de Glucosa optimos: " + this.glucosaEnRango);
+    public String eventosGlucosa() {
+        return "Eventos totales de Gluocosa baja: " + this.glucosaBaja
+                + "\nEventos totales de Gluocosa alta: " + this.glucosaAlta
+                + "\nEventos totales de Glucosa optimos: " + this.glucosaEnRango;
     }
 
     /**
@@ -203,14 +186,12 @@ public class ControlGlucosa {
                 + "Nombre del dispositivo de control: " + this.marca + "\n"
                 + "Fecha de creacion del registro: " + this.fechaCreacion + "\n"
                 + "Controles totales realizados: " + this.controles + "\n"
-                + "Eventos de Glucosa Baja: " + this.glucosaBaja + "\n"
-                + "Eventos de Glucosa Alta: " + this.glucosaAlta + "\n"
-                + "Mediciones de Glucosa en rango: " + this.glucosaEnRango + "\n"
+                + eventosGlucosa() + "\n"
                 + mediaGlucosa();
     }
 
     /**
-     * Metodo que limpia el registro de glucosa dejando los valores a 0
+     * Metodo que reinicia el registro de glucosa dejando los valores a 0
      */
     public void limpiarRegistro() {
         Scanner sc = new Scanner(System.in);
@@ -224,6 +205,7 @@ public class ControlGlucosa {
             this.glucosaEnRango = 0;
             registroAzucar.clear();
             horasControl.clear();
+            System.out.println("");
             System.out.println("Registro reinicializado.");
             System.out.println("");
         } else {
