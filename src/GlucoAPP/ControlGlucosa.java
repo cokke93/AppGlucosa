@@ -77,7 +77,7 @@ public class ControlGlucosa {
      */
     public void registrarGlucosa() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Ingrese el nivel de glucosa: ");
+        System.out.print("Ingrese su valor actual de glucosa: ");
         int glucosa = sc.nextInt();
 
         this.glucosa = glucosa;
